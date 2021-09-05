@@ -1,0 +1,111 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div class="container-xxl subContainer pt-3 ps-0 pe-0" sec:authorize="hasAuthority('REP_R') and hasRole('ROLE_ADMIN')">
+ 
+<div class="card subCard p-3" >
+
+<form action="#" th:action="${pssView.reportId}  ? @{/report/edit} : @{/report/write}" th:object="${pssView}" id="basicmanageReportinfoForm" name="basicmanageReportinfoForm" method="post">
+
+<div class="fieldset02 mt-3">
+  <h1><span>Report Information</span></h1>
+            <input type="hidden"  id="reportId"  th:field="*{reportId}" th:value="${pssView?.reportId}">
+            <div class="row px-2 pt-2">
+              <div class="col-md-12 mb-3">
+                <label for="reportName">Report Name</label>
+                <input type="text" class="form-control" id="reportName" name="reportName" th:field="*{reportName}" th:value="${pssView?.reportName}" autocomplete="off">
+              </div>             
+            </div>  
+              <div class="row px-2">               
+                <div class="col-md-3 mb-3">
+                  <label for="reportGroup">Report Group</label>
+                    <select class="form-control" id="reportGroup"  th:field="*{reportGroup}">
+                        <option th:each="reportGroup : ${reportGroup}" th:value="${reportGroup.code2}" th:utext="${reportGroup.codename}" th:selected="${reportGroup.code2==pssView.reportGroup}">
+                        </option>
+                    </select>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="reportType">Report Type</label>
+                    <select class="form-control" id="reportType"  th:field="*{reportType}">
+                        <option th:each="reportType : ${reportType}" th:value="${reportType.code2}" th:utext="${reportType.codename}" th:selected="${reportType.code2==pssView.reportType}">
+                        </option>
+                    </select>
+                </div>  
+                <div class="col-md-2 mb-3 pe-0">
+                  <label for="reportOrder">Sort Order</label>
+                    <select class="form-control" id="reportOrder" th:field="*{reportOrder}">
+                        <option th:each="i : ${#numbers.sequence(0, 100)}" th:value="${i}" th:text="${i}" th:selected="${i==pssView.reportOrder}">
+                        </option>
+                    </select>
+                </div> 
+                <div class="col-md-1  pt-3">
+                    <div class="form-check">
+                      <input class="form-check-input big-checkbox me-2" type="checkbox" value="1" id="divid" name="divid" th:checked="${pssView.divid==true}">
+                      <label class="form-check-label mt-2" for="divid">
+                        Divide
+                      </label>
+                    </div>
+                </div> 
+                <div class="col-md-2  pt-3">
+                    <div class="form-check">
+                      <input class="form-check-input big-checkbox me-2" type="checkbox" value="1" id="Available" name="Available"  th:checked="${pssView.Available==true}">
+                      <label class="form-check-label mt-2" for="Available">
+                        Available
+                      </label>
+                    </div>
+                </div> 
+              </div>
+             <div class="row px-2"> 
+                <div class="col-md-7 mb-3">
+                <label for="methodName">Method Name</label>
+                <input type="text" class="form-control"   id="methodName" name="methodName" th:field="*{methodName}" th:value="${pssView?.methodName}" autocomplete="off">
+                </div> 
+                <div class="col-md-4 mb-3">
+                  <label for="reportUserLevel">Report Level</label>
+                    <select class="form-control" id="reportUserLevel"  th:field="*{reportUserLevel}">
+                        <option th:each="reportUserLevel : ${reportUserLevel}" th:value="${reportUserLevel.code2}" th:utext="${reportUserLevel.codename}" th:selected="${reportUserLevel.code2==pssView.reportUserLevel}">
+                        </option>
+                    </select>
+                </div> 
+
+              </div>
+</div>   
+<div class="text-center">
+        <button type="submit" class="btn btn-outline-primary btn-sm" id="addreportBtn" th:if="not ${pssView.reportId}" sec:authorize="hasAuthority('REP_A') and hasRole('ROLE_ADMIN')"><i class="fa fa-plus"></i> Add</button>
+        <button type="submit" class="btn btn-outline-warning btn-sm" id="editreportBtn" th:if="${pssView.reportId}" sec:authorize="hasAuthority('REP_E') and hasRole('ROLE_ADMIN')"><i class="fa fa-edit"></i> edit</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" id="delcodeBtn" th:if="${pssView.reportId}" sec:authorize="hasAuthority('REP_D') and hasRole('ROLE_ADMIN')"><i class="fa fa-minus"></i> Delete</button>
+        <button type="button" class="btn btn-outline-dark btn-sm"  id="listdataBtn"><i class="fa fa-list-ul"></i> List</button>    
+</div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+<!-- Page Content -->
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>
+<script th:src="@{/js/pss-managereportscustom.js}"></script><!--Custom js-->

@@ -1,0 +1,142 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+<!-- Page Content -->
+<div class="container-fluid subContainer" sec:authorize="hasAuthority('COM_R') and hasRole('ROLE_ADMIN')">
+  <div class="card subCard">
+
+
+    <!--Search Information Tool-->
+    <div class="card-body subcard-body pb-0 pt-2">
+        <form class="row row-cols-auto" th:object="${pssSearch}" th:action="@{/company/list}" method="post" name="searchformmanageCompany" id="searchformmanageCompany">
+         <div class="col pe-2">
+            <select class="form-control" th:field="*{searchIsland}" id="searchIsland" name="searchIsland">
+                <option value="-1">-All Island-</option>
+                <option th:each="islandGroup : ${islandGroup}" th:value="${islandGroup.code2}" th:utext="${islandGroup.codename}" th:selected="${islandGroup.code2==filterForm.searchIsland}">
+                </option>
+            </select>
+          </div>  
+          <div class="col pe-2">
+            <select class="form-control" th:field="*{searchType}" id="searchType" name="searchType">
+                <option value="-1">-All Type-</option>
+                <option th:each="companyType : ${companyType}" th:value="${companyType.code2}" th:utext="${companyType.codename}" th:selected="${companyType.code2==filterForm.searchType}">
+                </option>
+            </select>
+          </div>  
+
+
+          <div class="col pe-2">
+            <input type="text" class="form-control" th:field="*{searchName}" id="searchName" name="searchName" placeholder="Search Name">
+          </div>   
+          <div class="col pe-2">
+            <button type="submit" class="btn btn-outline-secondary mb-2 btn-sm"><i class="fa fa-search"></i> Search</button> 
+            <button type="button" class="btn btn-outline-primary mb-2 btn-sm" id='manageCompanyinputBtn' sec:authorize="hasAuthority('COM_A') and hasRole('ROLE_ADMIN')"><i class="fa fa-plus"></i> Add</button>
+          </div>
+                  
+        </form>
+    </div>
+<!--Search Information Tool-->
+  </div>  
+
+
+
+<!--Listing Log-->
+    <div class="table-responsive " >
+
+      <table id="managecompanylistTable" class="table  table-bordered mb-0 table-hover">
+          <thead class="commonThead">
+              <tr>
+                  <th>Company ID</th>
+                  <th>Type</th>
+                  <th>Company Name</th>
+                  <th>Branch Name</th>
+                  <th>Island</th>
+                  <th>Address</th> 
+                  <th>City</th> 
+                  <th>State</th>  
+                  <th>Zipcode</th> 
+
+                  <th>LastUpdated</th>
+              </tr>
+            
+          </thead>
+          <tbody>
+          <tr th:each="results : ${results}" sec:authorize="hasAuthority('COM_R') and hasRole('ROLE_ADMIN')">
+              <td ><a href="#" th:onclick="@{'loadmanageCompanydetail(' + ${results.CompanyID} + ');'}" th:text="${results.CompanyID}">1</a></td>
+              <td th:text="${results.comTypename}">Type</td>
+              <td th:text="${results.comName}">Name</td>
+              <td th:text="${results.comBranch}">Name</td>
+              <td th:text="${results.comIslandname}">Island</td>
+              <td th:text="${results.comAddress}">Address</td>
+              <td th:text="${results.comCity}">City</td>
+              <td th:text="${results.comState}">State</td>
+              <td th:text="${results.comZip}">ZipCode</td>
+              <td th:text="${results.lastUpdated}">04/13/2021 12:00:00</td>
+          </tr>
+
+        </tbody>                                        
+      </table>
+
+
+
+
+
+        <!--Paging Log-->
+        <div class="bbsBottom" th:if="${results.totalPages gt 0}" sec:authorize="hasAuthority('COM_R') and hasRole('ROLE_ADMIN')">
+            <ul class="pagination pagination-md justify-content-center " style="margin:10px 0" th:with="start=${T(Math).floor(results.number/10)*10 + 1},
+                    last=(${start + 9 < results.totalPages ? start + 9 : results.totalPages})">
+
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/company/list?page=1&searchIsland={searchIsland}&searchType={searchType}&searchName={searchName}(searchIsland=${filterForm.searchIsland},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}" aria-label="First">
+                        <span aria-hidden="true">First</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${results.number eq 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/company/list?page={id}&searchIsland={searchIsland}&searchType={searchType}&searchName={searchName}(id=${results.number lt 2 ? 1 : results.number},searchIsland=${filterForm.searchIsland},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}"><<</a>
+                </li>
+                <li  th:each="page: ${#numbers.sequence(start, last)}" th:class=" ${page == results.number+1} ? 'page-item active' : 'page-item ' ">
+                    <a class="page-link" th:href="@{/company/list?page={id}&searchIsland={searchIsland}&searchType={searchType}&searchName={searchName}(id=${page},searchIsland=${filterForm.searchIsland},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}"
+                       th:text="${page}">1</a>
+
+                </li>
+                <li class="page-item"  th:classappend="${results.number + 1 eq results.totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/company/list?page={id}&searchIsland={searchIsland}&searchType={searchType}&searchName={searchName}(id=${results.number + 2},searchIsland=${filterForm.searchIsland},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}">>></a>
+                </li>
+                <li class="page-item" >
+                    <a class="page-link" th:href="@{/company/list?page={id}&searchIsland={searchIsland}&searchType={searchType}&searchName={searchName}(id=${results.totalPages},searchIsland=${filterForm.searchIsland},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}" aria-label="Last">
+                        <span aria-hidden="true">Last</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--Paging Log-->
+
+  </div>      
+
+
+
+<!--Listing Log-->
+
+
+
+
+</div>
+<!-- Page Content -->
+
+
+
+
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>
+<script th:src="@{/js/pss-managecompanycustom.js}"></script><!--Custom js-->
+

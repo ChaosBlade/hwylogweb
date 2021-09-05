@@ -1,0 +1,57 @@
+<div th:fragment="footer">
+    <div  id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="sidenav_cat">
+            <ul class="">
+                <li class="nav-item dropdown"  sec:authorize="hasAuthority('HW_R')">
+                    <a href="/hwymaillog/list" class="nav-link dropdown-toggle">HWY Log</a>
+                </li>
+                <li class="nav-item dropdown" sec:authorize="hasAuthority('SI_R')">
+                    <a href="/signaturelog/list" class="nav-link dropdown-toggle">Signature Log</a>
+                </li>
+                <li class="nav-item dropdown" sec:authorize="hasAuthority('HWE_R')">
+                    <a href="/hwyemaillog/list" class="nav-link dropdown-toggle">HWY-E Mail Log</a>
+                </li>
+                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="#" class="nav-link dropdown-toggle">DataBase Setting</a>
+                </li>
+                <li class="nav-item02" sec:authorize="hasAuthority('USER_R')">
+                    <a href="/members/list" class="nav-link">- Users</a>
+                </li>
+                <li class="nav-item02" sec:authorize="hasAuthority('REP_R')">
+                    <a href="/report/list" class="nav-link">- Reports</a>
+                </li>
+                <li class="nav-item02" sec:authorize="hasAuthority('COM_R')">
+                    <a href="/fstqpcost/list" class="nav-link">- Company & Office</a>
+                </li>
+                <li class="nav-item02" sec:authorize="hasAuthority('COD_R')">
+                    <a href="/code/list" class="nav-link">- Code</a>
+                </li>
+
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="position-fixed top-50 end-0 translate-middle-y " style="z-index: 11">
+        <div id="successalert01" class="toast hide text-white bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    The update was successful !!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <div id="maskloader"><img src="image/mainlogo.png"></div>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/jquery-ui.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/jquery.maskedinput.js}"></script>
+    <script th:src="@{js/select2.min.js}"></script>
+    <script th:src="@{js/bootstrap-datepicker.min.js}"></script>
+    <script th:src="@{js/jquery.validate.min.js}"></script>
+    <script th:src="@{js/jsuites.js}"></script>
+    <script th:src="@{js/defaultpage.js}"></script><!--Custom js-->
+    <script th:src="@{js/pss-custom.js}"></script><!--Custom js-->
+</div>

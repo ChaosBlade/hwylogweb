@@ -1,0 +1,480 @@
+/********************************************/
+/* Common Css */
+/********************************************/
+body {background-color:#F0EEEE;}
+.currencyFormat:before { content: '$'; }
+/* Login Css */
+.login {
+  border: 0;
+  border-radius: 27.5px;
+  box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
+  background-color:#FFFFFF;
+  overflow: hidden;
+}
+
+.login-img {
+ text-align:center;
+	padding-top: 5rem;
+}
+.mainlogo{
+	margin-bottom:1rem;
+}
+.login-body {
+    padding: 2rem 2rem 1.5rem 3.5rem;
+}
+
+
+.login-title {
+    font-size: 22px;
+    color: #000;
+    font-weight: normal;
+    font-family:Raleway;
+    font-weight:bold;
+    margin-bottom: 23px; }
+
+.login-title-sub {
+    font-size: 0.8rem;
+    color: #919aa3; }
+
+.login-version-text {
+    font-size: 0.7rem;
+    color: #919aa3;
+    text-align:right;
+    margin-bottom: 1rem; }
+
+/* Login Form Css */
+.login form {
+    max-width: 326px; }
+
+.login .form-control {
+    border: 1px solid #d5dae2;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    min-height: 45px;
+    font-size: 13px;
+    line-height: 15;
+    font-weight: normal; }
+.login .form-control::-webkit-input-placeholder {color: #919aa3; }
+.login .form-control::-moz-placeholder {color: #919aa3; }
+.login .form-control:-ms-input-placeholder {color: #919aa3; }
+.login .form-control::-ms-input-placeholder {color: #919aa3; }
+.login .form-control::placeholder {color: #919aa3; }
+
+.login .login-btn {
+    padding: 13px 20px 12px;
+    background-color: #000;
+    border-radius: 4px;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #fff;
+    margin-bottom: 24px; }
+.login .login-btn:hover {
+      border: 1px solid #000;
+      background-color: transparent;
+      color: #000; }
+.login .login-footer-text {
+    font-size: 0.9rem;
+    color: #919aa3;
+    margin-bottom: 1.5rem; }
+
+@media (max-width: 767px) {
+.login-img {padding-top: 2rem;padding-bottom:0;}
+}
+form .error {
+  color: red;
+  font-size:0.8rem;
+
+}
+
+
+
+
+
+body {font-size:12px;background-color:#F0EEEE;}
+nav{background-image:url('../image/top_main.png')}
+nav-item a {color:#F0EEEE;}
+.navbar {background-color:#005288;}
+.navIcon {font-size:1.4rem;}
+.linkPointer {cursor:pointer;}
+.mainIconText {text-align:center;padding-top:1rem;font-size:4rem;}
+
+.subContainer {margin-top:5rem;}
+.subCard {margin-bottom:1rem;}
+.subcard-body {padding:1em;}
+
+/*.date span{display:none;}*/
+/*Main Report Link*/
+.cursorpointer {cursor:pointer;color:#000000;}
+.cursorpointer:hover{background-color:#005288;color:#FFFFFF;}
+
+.big-checkbox {margin-top:3px;width: 30px; height: 30px;}
+.md-checkbox {margin-top:3px;width: 18px; height: 18px;}
+.big-radio {margin-top:3px;width: 25px; height: 25px;}
+.table-responsive a {text-decoration:none;}
+
+.navbar-brandtitle{display:inline-block;padding-top:.3125rem;padding-bottom:.3125rem;margin-right:1rem;font-size:1.25rem;line-height:inherit;white-space:nowrap}
+.navbar-brandtitle i{margin-right:0.8rem;}
+table {background-color:#FFFFFF;}
+table thead{background-color:#fafafa;border-style: solid;border-color:#cccccc;}
+.navbar-brand {font-family:Raleway;font-weight:500;}
+#listTable tbody tr{cursor:pointer;}
+#maskloader {
+    position:fixed;
+    top:0;
+    left:0;
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height: 100%;
+    background-color: #FFF;
+    z-index:50000;
+    padding-top:20rem;
+    text-align:center;
+    display:none;
+}
+.bbsBottom {background-color:#fafafa;border-style: solid;border-color:#cccccc;margin-top:0;border-top-color: transparent;border-left-color: transparent;border-right-color: transparent;}
+
+.btn-title {color:#FFFFFF;}
+.btn-title:hover{color:#FFFFFF;}
+
+
+.commonThead {color:#FFFFFF;background-image:url('../image/top_main.png')}
+.commonThead tr{height:2.6rem;vertical-align: middle;}
+.commonThead th{text-align:center;}
+.table-responsive table {width:100%;}
+.table-responsive table tbody td {text-align:center;}
+
+
+
+
+/**
+ * Manage Users Page
+ */
+#manageuserslistTable td:nth-child(1){width:120px;}
+#manageuserslistTable td:nth-child(2){width:100px;}
+#manageuserslistTable td:nth-child(3){width:190px;}
+#manageuserslistTable td:nth-child(4){width:200px;}
+#manageuserslistTable td:nth-child(5){width:120px;}
+#manageuserslistTable td:nth-child(6){min-width:240px;}
+#manageuserslistTable td:nth-child(7){width:150px;}
+#manageuserslistTable td:nth-child(8){width:140px;}
+#manageuserslistTable td:nth-child(9){width:150px;}
+#manageuserslistTable td:nth-child(10){width:150px;}
+#manageuserslistTable td:nth-child(11){width:150px;}
+#manageuserslistTable td:nth-child(12){width:150px;}
+
+#manageuserslistTable tbody td:nth-child(1) {text-align:left;}
+#manageuserslistTable tbody td:nth-child(2) {text-align:left;}
+#manageuserslistTable tbody td:nth-child(3) {text-align:left;}
+#manageuserslistTable tbody td:nth-child(4) {text-align:left;}
+#manageuserslistTable tbody td:nth-child(5) {text-align:left;}
+#manageuserslistTable tbody td:nth-child(6) {text-align:left;}
+#manageuserslistTable tbody td:nth-child(7) {text-align:left;}
+
+
+
+
+/**
+ * Manage Company Page
+ */
+#managecompanylistTable td:nth-child(1){width:90px;}
+#managecompanylistTable td:nth-child(2){width:90px;}
+#managecompanylistTable td:nth-child(3){width:320px;}
+#managecompanylistTable td:nth-child(4){width:200px;}
+#managecompanylistTable td:nth-child(5){width:90px;}
+#managecompanylistTable td:nth-child(6){min-width:290px;}
+#managecompanylistTable td:nth-child(7){width:120px;}
+#managecompanylistTable td:nth-child(8){width:90px;}
+#managecompanylistTable td:nth-child(9){width:90px;}
+#managecompanylistTable td:nth-child(10){width:150px;}
+#managecompanylistTable tbody td:nth-child(3) {text-align:left;}
+#managecompanylistTable tbody td:nth-child(4) {text-align:left;}
+#managecompanylistTable tbody td:nth-child(6) {text-align:left;}
+
+ /**
+ * Manage Report
+  */
+#managereportlistTable tbody td:nth-child(1){width:100px;}
+#managereportlistTable tbody td:nth-child(2){width:120px;}
+#managereportlistTable tbody td:nth-child(3){width:140px;}
+#managereportlistTable tbody td:nth-child(4){min-width:200px;}
+#managereportlistTable tbody td:nth-child(5){width:80px;}
+#managereportlistTable tbody td:nth-child(6){width:80px;}
+#managereportlistTable tbody td:nth-child(7){width:180px;}
+#managereportlistTable tbody td:nth-child(8){width:100px;}
+#managereportlistTable tbody td:nth-child(9){width:180px;}
+#managereportlistTable tbody td:nth-child(3) {text-align:left;}
+#managereportlistTable tbody td:nth-child(4) {text-align:left;}
+#managereportlistTable tbody td:nth-child(7) {text-align:left;}
+#managereportlistTable tbody td:nth-child(9) {text-align:left;}
+
+
+
+ /**
+ * Manage Code Project
+ */
+#managecodelistTable tbody td:nth-child(1){width:80px;}
+#managecodelistTable tbody td:nth-child(2){width:110px;}
+#managecodelistTable tbody td:nth-child(3){width:220px;}
+#managecodelistTable tbody td:nth-child(4){width:60px;}
+#managecodelistTable tbody td:nth-child(5){width:320px;}
+#managecodelistTable tbody td:nth-child(6){width:80px;}
+#managecodelistTable tbody td:nth-child(7){min-width:200px;}
+#managecodelistTable tbody td:nth-child(8){width:80px;}
+#managecodelistTable tbody td:nth-child(9){width:120px;}
+#managecodelistTable tbody td:nth-child(10){width:180px;}
+#managecodelistTable tbody td:nth-child(3) {text-align:left;}
+#managecodelistTable tbody td:nth-child(5) {text-align:left;}
+#managecodelistTable tbody td:nth-child(7) {text-align:left;}
+#managecodelistTable tbody td:nth-child(9) {text-align:left;}
+
+
+/**
+ * Manage HWY Mail Log Page
+ */
+#managehwymaillistTable td:nth-child(1){width:40px;}
+#managehwymaillistTable td:nth-child(2){width:90px;}
+#managehwymaillistTable td:nth-child(3){width:180px;}
+#managehwymaillistTable td:nth-child(4){width:280px;}
+#managehwymaillistTable td:nth-child(5){width:60px;}
+#managehwymaillistTable td:nth-child(6){min-width:180px;}
+#managehwymaillistTable td:nth-child(7){width:180px;}
+#managehwymaillistTable td:nth-child(8){width:90px;}
+#managehwymaillistTable tbody td:nth-child(4) {text-align:left;}
+#managehwymaillistTable tbody td:nth-child(6) {text-align:left;}
+#managehwymaillistTable tbody td:nth-child(7) {text-align:left;}
+
+
+/**
+ * Manage HWY-E Mail Log Page
+ */
+#managehwyemaillistTable td:nth-child(1){width:40px;}
+#managehwyemaillistTable td:nth-child(2){width:60px;}
+#managehwyemaillistTable td:nth-child(3){width:80px;}
+#managehwyemaillistTable td:nth-child(4){width:180px;}
+#managehwyemaillistTable td:nth-child(5){min-width:280px;}
+#managehwyemaillistTable td:nth-child(6){width:200px;}
+#managehwyemaillistTable td:nth-child(7){min-width:200px;}
+#managehwyemaillistTable td:nth-child(8){width:100px;}
+#managehwyemaillistTable td:nth-child(9){width:100px;}
+#managehwyemaillistTable td:nth-child(10){width:100px;}
+#managehwyemaillistTable tbody td:nth-child(4) {text-align:left;}
+#managehwyemaillistTable tbody td:nth-child(5) {text-align:left;}
+#managehwyemaillistTable tbody td:nth-child(6) {text-align:left;}
+#managehwyemaillistTable tbody td:nth-child(7) {text-align:left;}
+
+/**
+ * Manage HWY Sign Log Page
+ */
+#managehwysignlistTable td:nth-child(1){width:40px;}
+#managehwysignlistTable td:nth-child(2){width:90px;}
+#managehwysignlistTable td:nth-child(3){width:120px;}
+#managehwysignlistTable td:nth-child(4){width:240px;}
+#managehwysignlistTable td:nth-child(5){width:60px;}
+#managehwysignlistTable td:nth-child(6){min-width:180px;}
+#managehwysignlistTable td:nth-child(7){width:240px;}
+#managehwysignlistTable td:nth-child(8){width:90px;}
+#managehwysignlistTable tbody td:nth-child(3) {text-align:left;}
+#managehwysignlistTable tbody td:nth-child(4) {text-align:left;}
+#managehwysignlistTable tbody td:nth-child(6) {text-align:left;}
+#managehwysignlistTable tbody td:nth-child(7) {text-align:left;}
+
+
+
+#actionTableRow td {padding:1px 2px 1px 2px;}
+#permissionTableRow td {padding:1px 2px 1px 2px;}
+#actionTable td:nth-child(1) {text-align:left;}
+
+
+
+
+
+
+ /**
+ * Material & Research Main 
+ */
+.box {
+  width: 100%;
+  height: 100px;
+  margin-bottom:0.6rem;
+  background-color: #ffffff;
+  border-color: #343a40; 
+  border-radius:0.8rem; 
+  
+}  
+.box a {
+  color: #000000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 0.0rem;
+  font-weight: 700;
+  padding: 0.8rem 0.2rem 0 0.2rem;
+  text-align: center;
+  transition: none;
+  line-height: 1;
+  font-family: 'Open Sans Condensed', Arial, Verdana, sans-serif;
+}
+
+
+.box:hover{
+  background-color: #005288;
+  border-radius:0.8rem;
+}
+.box:hover a{
+ color:#fff;
+ text-decoration:none;
+}
+.box i{
+ margin-bottom:0.7rem;
+}
+.card {font-size:0.9rem;}
+.card .cardinheader{padding:1rem;font-size:1.09rem;font-family:Raleway;background-image:url('../image/top_main.png')}
+.card .cardinheader .widget-icon{margin-right:0.4rem;}
+
+
+.card-body .row {padding:0;}
+.card-body .row div {padding:5px;}
+.card-body .row i {margin-right:0.4rem;}
+.card-body .row hr {margin-top:0.4rem;margin-bottom:0.4rem;}
+.toplogo {height:2.4rem;margin-right:0.8rem;}
+
+colgroup>col:first-child {
+width:0;
+}
+
+
+
+
+
+
+
+/**
+ * Group Permission Page
+ */
+#grouppermissionlistTable td{width:60px;}
+#grouppermissionlistTable td:nth-child(1){width:130px;}
+#grouppermissionlistTable td:nth-child(12){width:100px;}
+#grouppermissionlistTable td:nth-child(13){width:120px;}
+#grouppermissionlistTable td:nth-child(14){width:120px;}
+#grouppermissionlistTable td:nth-child(15){width:120px;}
+#grouppermissionlistTable td:nth-child(21){width:160px;}
+#grouppermissionlistTable tbody td:nth-child(1) {text-align:left;}
+#grouppermissionlistTable tbody td:nth-child(21) {text-align:left;}
+
+
+
+
+
+
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 999;
+	top: 0;
+	right: -30px;
+	background-color: #0b2d3f;
+	background-image: linear-gradient(45deg, #101920, #18456c 80%);
+	overflow-x: hidden;
+	transition: .5s;
+	padding-top: 65px;
+	box-shadow: 0 0 25px 8px rgba(44, 71, 74, .4)
+}
+
+.sidenav a {
+	padding: 8px 15px 8px 15px;
+	text-decoration: none;
+	color: #fff;
+	display: block;
+	transition: .3s
+}
+
+text-sha .sidenav .dropdown a {
+	background: 0 0!important;
+	text-shadow: 1px 2px 1px rgba(0, 0, 0, .3);
+	display: inline-block;
+	width: 100%
+}
+
+
+
+.sidenav .dropdown {
+	position: relative;
+	float: none;
+
+}
+
+.sidenav .dropdown-toggle {
+	position: static
+}
+
+.sidenav .dropdown-toggle::after {
+	position: absolute;
+	right: 30px;
+	top: 15px
+}
+
+.sidenav .dropdown .dropdown-item {
+	padding-left: 24px
+}
+
+.sidenav a:hover {
+	color: #f1f1f1
+}
+
+.sidenav .closebtn {
+	font-size: 36px;
+	padding-left:250px;
+}
+
+
+.sidenav[style="width: 330px;"] > nav > div {
+	position: relative;
+	z-index: 99;
+}
+
+.sidenav ul {
+	padding: 0;
+	width: 300px
+}
+.sidenav .nav-item02 {
+	border-bottom: 0
+}
+
+.sidenav .nav-item02 a {
+	padding-left: 20px;
+	font-size: 14px;
+	font-weight: normal;
+	opacity: .5
+}
+
+
+.sidenav .nav-item {
+	border-bottom: 1px solid rgba(255, 255, 255, .1)
+}
+
+.sidenav .nav-item a {
+	padding-left: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	opacity: .5
+}
+
+.sidenav .dropdown a:active,
+.sidenav .dropdown a:focus,
+.sidenav .dropdown a:hover,
+.sidenav .nav-item a:hover {
+	color: #fff;
+	opacity: 1
+}
+
+.sidenav_cat {
+	margin-bottom: 30px;
+	color: rgba(255, 255, 255, .5)
+}
+
+.sidenav_cat li {
+	list-style: none
+}

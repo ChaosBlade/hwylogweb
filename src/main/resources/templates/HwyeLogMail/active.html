@@ -1,0 +1,122 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div class="container-xxl subContainer pt-3 ps-0 pe-0" sec:authorize="hasAuthority('HWE_R')">
+
+    <div class="card subCard p-3" >
+
+
+
+        <form action="#" th:action="${pssView.logID}  ? @{/hwyemaillog/edit} : @{/hwyemaillog/write}" th:object="${pssView}" id="basicmanagehwylogForm" name="basicmanagehwylogForm" method="post">
+            <input type="hidden"  id="logID"  th:field="*{logID}" th:value="${pssView?.logID}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="fieldset03">
+                        <h1><span>Mail Information</span></h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="InputDate">Log Date</label>
+                            <div class="input-group date  p-0">
+                                <input class="form-control DateFormat" type="text"  id="InputDate" name="InputDate"  autocomplete="off" th:value="${#dates.format(pssView.InputDate, 'MM/dd/yyyy')}" required>
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="LetterNumber">Letter No.</label>
+                            <input type="text" class="form-control" id="LetterNumber" name="LetterNumber"  th:field="*{LetterNumber}"  autocomplete="off"    th:value="${pssView?.LetterNumber}">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="Originator">Originator</label>
+                            <input type="text" class="form-control" id="Originator" name="Originator"  th:field="*{Originator}"  autocomplete="off"    th:value="${pssView?.Originator}" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="Subject">Subject</label>
+                            <textarea class="form-control"  id="Subject" name="Subject" th:field="*{Subject}" th:text="${pssView?.Subject}" style="height:6rem;"  required></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="fieldset03">
+                        <h1><span>Action Taken</span></h1>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="letternDate">Letter Dated</label>
+                        <div class="input-group date  p-0">
+                            <input class="form-control DateFormat" type="text"  id="letternDate" name="letternDate"  autocomplete="off"  th:value="${#dates.format(pssView.letternDate, 'MM/dd/yyyy')}" required>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                        <div class="col-md-9 mb-3">
+                            <label for="currentAction">Routed for Action to</label>
+                            <input type="text" class="form-control" id="currentAction" name="currentAction"  th:field="*{currentAction}"  autocomplete="off"    th:value="${pssView?.currentAction}">
+                        </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="letternDate">Suspense Date</label>
+                        <div class="input-group date  p-0">
+                            <input class="form-control DateFormat" type="text"  id="suspenddate" name="suspenddate"  autocomplete="off"  th:value="${pssView.suspenddate}">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="actionrequested">Action Requested</label>
+                        <input type="text" class="form-control" id="actionrequested" name="actionrequested"  th:field="*{actionrequested}"  autocomplete="off"    th:value="${pssView?.actionrequested}">
+                    </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="finalAction">Action Taken</label>
+                            <input type="text" class="form-control" id="finalAction" name="finalAction"  th:field="*{finalAction}"  autocomplete="off"    th:value="${pssView?.finalAction}">
+                        </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="datefiled">Date Filed</label>
+                        <div class="input-group date  p-0">
+                            <input class="form-control DateFormat" type="text"  id="datefiled" name="datefiled"  autocomplete="off" th:value="${pssView.datefiled}">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-9 mb-3">
+                        <label for="placefiled">Place Filed</label>
+                        <input type="text" class="form-control" id="placefiled" name="placefiled"  th:field="*{placefiled}"  autocomplete="off"    th:value="${pssView?.placefiled}">
+                    </div>
+                </div>
+
+
+
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-primary btn-sm" id="adddataBtn" th:if="not ${pssView.logID}" sec:authorize="hasAuthority('HWE_A')"><i class="fa fa-plus"></i> Add</button>
+                <button type="submit" class="btn btn-outline-warning btn-sm" id="editdataBtn" th:if="${pssView.logID}" sec:authorize="hasAuthority('HWE_E')"><i class="fa fa-edit"></i> edit</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" id="deldataBtn" th:if="${pssView.logID}" sec:authorize="hasAuthority('HWE_D')"><i class="fa fa-minus"></i> Delete</button>
+                <button type="button" class="btn btn-outline-dark btn-sm"  id="listdataBtn"><i class="fa fa-list-ul"></i> List</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+</div>
+<!-- Page Content -->
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>
+<script th:src="@{/js/log-managehwyemaillog.js}"></script><!--Custom js-->

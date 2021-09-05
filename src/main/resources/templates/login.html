@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+
+
+
+
+
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+  <div class="container-sm">
+    <div class="login">
+
+      <div class="row no-gutters">
+        <div class="col-md-5 login-img" >
+          <img src="image/mainlogo.png" alt="DOT" class="mainlogo"><br>
+          <img src="image/mainlogo02.png" alt="HWY MAIL & SIGNATURE LOG DB" >
+        </div>
+        <div class="col-md-7">
+          <div class="login-body">
+            <p class="login-version-text">Version 1.0 Last Updated on July 01,2021</p>
+            <p class="login-title">HWY MAIL & SIGNATURE LOG DB</p>
+            <p class="login-title-sub">* Please Type User name and Password</p>
+            <form th:action="@{/login}" name="login-form" id="login-form" method="post" accept-charset="utf-8">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="UserName" name="UserName" value="" placeholder=" ">
+                <label for="UserName">User Name</label>
+              </div>
+              <div class="form-floating">
+                <input type="password" class="form-control" id="PassWord" name="PassWord" value="" placeholder=" ">
+                <label for="PassWord">Password</label>
+              </div>
+
+
+              <input name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Sign On">
+            </form>
+
+            <p class="login-footer-text">For View-Only user, <br>Please enter '<b>guest</b>' for both user name and password</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.maskedinput.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+</body>
+</html>
+<script src="js/defaultpage.js"></script><!--Custom js-->
+<script src="js/pss-custom.js"></script><!--Custom js-->
+
+
+<script type="text/javascript">
+  $(function() {
+    // Validation
+    $("#login-form").validate({
+      // Rules for form validation
+      rules : {
+        UserName : {
+          required : true
+        },
+        PassWord : {
+          required : true,
+          minlength : 3,
+          maxlength : 20
+        }
+      },
+      // Messages for form validation
+      messages : {
+        UserName : {
+          required : 'Please enter your name'
+        },
+        PassWord : {
+          required : 'Please enter your password'
+        }
+      },
+
+      // Do not change code below
+      errorPlacement : function(error, element) {
+        error.insertAfter(element.parent());
+      }
+    });
+  });
+</script>

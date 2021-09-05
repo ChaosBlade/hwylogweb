@@ -1,0 +1,137 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div class="container-xxl subContainer pt-3 ps-0 pe-0" sec:authorize="hasAuthority('COM_R') and hasRole('ROLE_ADMIN')">
+ 
+<div class="card subCard p-3" >
+
+
+
+<form action="#" th:action="${pssView.CompanyID}  ? @{/company/edit} : @{/company/write}" th:object="${pssView}" id="basicmanageCompanyForm" name="basicmanageCompanyForm" method="post">
+<input type="hidden"  id="CompanyID"  th:field="*{CompanyID}" th:value="${pssView?.CompanyID}">
+ <div class="row">
+    <div class="col-md-12">
+                    <div class="fieldset03">
+                      <h1><span>Company Information</span></h1>
+                    </div> 
+              <div class="row">  
+                <div class="col-md-6 mb-3">
+                  <label for="comName">Company Name</label>
+                  <input type="text" class="form-control" id="comName" name="comName"  th:field="*{comName}" th:value="${pssView?.comName}" autocomplete="off">
+                </div>                
+                <div class="col-md-2 mb-3">
+                  <label for="comType">Type</label>
+                    <select class="form-control" id="comType"  name="comType" th:field="*{comType}">
+                        <option th:each="companyType : ${companyType}" th:value="${companyType.code2}" th:utext="${companyType.codename}" th:selected="${companyType.code2==pssView.comType}">
+                        </option>
+                    </select>
+                </div> 
+                <div class="col-md-2 mb-3">
+                  <label for="comIsland">Island</label>
+                    <select class="form-control" id="comIsland"  name="comIsland" th:field="*{comIsland}">
+                        <option th:each="islandGroup : ${islandGroup}" th:value="${islandGroup.code2}" th:utext="${islandGroup.codename}" th:selected="${islandGroup.code2==pssView.comIsland}">
+                        </option>
+                    </select>
+                </div>   
+                <div class="col-md-2 mb-3">
+                  <label for="comBranch">Branch</label>
+                  <input type="text" class="form-control"  id="comBranch" name="comBranch"  th:field="*{comBranch}" th:value="${pssView?.comBranch}" autocomplete="off">
+                </div>
+
+
+             </div>  
+
+
+              <div class="row">  
+                <div class="col-md-6 mb-3">
+                  <label for="comAddress">Street Address</label>
+                  <input type="text" class="form-control" id="comAddress" name="comAddress"  th:field="*{comAddress}" th:value="${pssView?.comAddress}" autocomplete="off">
+                </div>
+                <div class="col-md-2 mb-3">
+                  <label for="comCity">City</label>
+                  <input type="text" class="form-control"  id="comCity" name="comCity"  th:field="*{comCity}" th:value="${pssView?.comCity}" autocomplete="off">
+                </div>
+                <div class="col-md-2 mb-3">
+                  <label for="comState">State</label>
+                  <input type="text" class="form-control"  id="comState" name="comState"  th:field="*{comState}" th:value="${pssView?.comState}" autocomplete="off">
+                </div>
+                <div class="col-md-2 mb-3">
+                  <label for="comZip">ZipCode</label>
+                  <input type="text" class="form-control"  id="comZip" name="comZip"  th:field="*{comZip}" th:value="${pssView?.comZip}" autocomplete="off">
+                </div>
+             </div>
+
+                 <div class="row">
+                     <div class="col-md-3 mb-3">
+                         <label for="officeSectionHeadName">Head Name</label>
+                         <input type="text" class="form-control"  id="officeSectionHeadName" name="officeSectionHeadName"  th:field="*{officeSectionHeadName}" th:value="${pssView?.officeSectionHeadName}" autocomplete="off">
+                     </div>
+                  <div class="col-md-3 mb-3">
+                    <label for="comTel">Phone</label>
+                    <input type="text" class="form-control"   id="comTel" name="comTel"  th:field="*{comTel}" th:value="${pssView?.comTel}" autocomplete="off">
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <label for="comEmail">Email</label>
+                    <input type="text" class="form-control" id="comEmail" name="comEmail"  th:field="*{comEmail}" th:value="${pssView?.comEmail}" autocomplete="off">
+                  </div>
+                     <div class="col-md-3 mb-3">
+                         <label for="officeDetail">Office Detail</label>
+                         <input type="text" class="form-control" id="officeDetail" name="officeDetail"  th:field="*{officeDetail}" th:value="${pssView?.officeDetail}" autocomplete="off">
+                     </div>
+                </div>
+
+
+
+    </div>
+
+ </div>
+
+
+
+<hr>
+    <div class="text-center">
+        <button type="submit" class="btn btn-outline-primary btn-sm" id="adddataBtn" th:if="not ${pssView.CompanyID}" sec:authorize="hasAuthority('COM_A') and hasRole('ROLE_ADMIN')"><i class="fa fa-plus"></i> Add</button>
+        <button type="submit" class="btn btn-outline-warning btn-sm" id="editdataBtn" th:if="${pssView.CompanyID}" sec:authorize="hasAuthority('COM_E') and hasRole('ROLE_ADMIN')"><i class="fa fa-edit"></i> edit</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" id="deldataBtn" th:if="${pssView.CompanyID}" sec:authorize="hasAuthority('COM_D') and hasRole('ROLE_ADMIN')"><i class="fa fa-minus"></i> Delete</button>
+        <button type="button" class="btn btn-outline-dark btn-sm"  id="listdataBtn"><i class="fa fa-list-ul"></i> List</button>
+    </div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+</div>
+<!-- Page Content -->
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>
+<script th:src="@{/js/pss-managecompanycustom.js}"></script><!--Custom js-->
+

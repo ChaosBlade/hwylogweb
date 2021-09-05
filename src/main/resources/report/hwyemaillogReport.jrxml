@@ -1,0 +1,352 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN"
+        "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+   http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="Report" pageWidth="595" pageHeight="842"
+        columnWidth="555" leftMargin="20" rightMargin="20"
+        topMargin="20" bottomMargin="20">
+    <property name="net.sf.jasperreports.export.pdf.metadata.title" value="HWY-E Mail Log Report" />
+    <property name="net.sf.jasperreports.export.pdf.display.metadata.title" value="true" />
+
+    <style name="Title" fontName="Times New Roman" fontSize="18" isBold="true"/>
+    <style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="9" isBold="true"/>
+    <style name="Detail" fontName="Arial" fontSize="9" isBold="false"/>
+
+
+    <field name="inputDate" class="java.util.Date">
+        <fieldDescription>
+            <![CDATA[inputDate]]>
+        </fieldDescription>
+    </field>
+    <field name="letterNumber" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[letterNumber]]>
+        </fieldDescription>
+    </field>
+    <field name="originator" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[originator]]>
+        </fieldDescription>
+    </field>
+    <field name="subject" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[subject]]>
+        </fieldDescription>
+    </field>
+
+    <field name="suspenddate" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[suspenddate]]>
+        </fieldDescription>
+    </field>
+    <field name="actionrequested" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[actionrequested]]>
+        </fieldDescription>
+    </field>
+    <field name="datefiled" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[datefiled]]>
+        </fieldDescription>
+    </field>
+
+
+    <field name="currentAction" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[currentAction]]>
+        </fieldDescription>
+    </field>
+    <field name="finalAction" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[finalAction]]>
+        </fieldDescription>
+    </field>
+    <field name="placefiled" class="java.lang.String">
+        <fieldDescription>
+            <![CDATA[placefiled]]>
+        </fieldDescription>
+    </field>
+    <field name="letternDate" class="java.util.Date">
+        <fieldDescription>
+            <![CDATA[letternDate]]>
+        </fieldDescription>
+    </field>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="50" splitType="Stretch">
+            <staticText>
+                <reportElement style="Title" x="0" y="0" width="555" height="40" uuid="1dcadd54-7d50-4470-85ed-189e4d910b25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Highways-E Mail Log]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <pageHeader>
+        <band/>
+    </pageHeader>
+
+
+    <columnHeader>
+        <band height="7" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="501ac6c4-e9d4-43cb-ba6b-7f2f44394cf3"/>
+                <graphicElement>
+                    <pen lineWidth="0.7" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="0" y="5" width="555" height="1" uuid="bbc24de3-c437-4421-893f-34532cd9eb94"/>
+                <graphicElement>
+                    <pen lineWidth="0.1" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnHeader>
+
+
+    <detail>
+        <band height="66" splitType="Stretch">
+            <staticText>
+                <reportElement style="Column header"  x="0" y="0" width="60" height="15" backcolor="#EFEFEF" mode="Opaque"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="3"/>
+                </textElement>
+                <text><![CDATA[Date :]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="Detail" x="61" y="0" width="68" height="15" backcolor="#EFEFEF" mode="Opaque"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression class="java.util.Date">
+                    <![CDATA[new SimpleDateFormat("MM/dd/yyyy").format($F{inputDate})]]>
+                </textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Column header"  x="130" y="0" width="50" height="15" backcolor="#EFEFEF" mode="Opaque"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <text><![CDATA[Log No :]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="Detail" x="181" y="0" width="108" height="15" backcolor="#EFEFEF" mode="Opaque"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{letterNumber}]]>
+                </textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Column header"  x="290" y="0" width="50" height="15" backcolor="#EFEFEF" mode="Opaque"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <text><![CDATA[Originator :]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="Detail" x="341" y="0" width="214" height="15" backcolor="#EFEFEF" mode="Opaque"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{originator}]]>
+                </textFieldExpression>
+            </textField>
+            <line>
+                <reportElement  x="0" y="15" width="555" height="1" uuid="501ac6c4-e9d4-43cb-ba6b-7f2f44394cf3"/>
+                <graphicElement>
+                    <pen lineWidth="0.08" lineColor="#EFEFEF"/>
+                </graphicElement>
+            </line>
+
+            <staticText>
+                <reportElement style="Column header"  x="0" y="19" width="60" height="15"/>
+                <textElement textAlignment="Left" verticalAlignment="Top">
+                    <paragraph leftIndent="3"/>
+                </textElement>
+                <text><![CDATA[Subject :]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToTallestObject" style="Detail" x="61" y="19" width="364" height="15"/>
+                <textElement textAlignment="Left" verticalAlignment="Top">
+                    <paragraph lineSpacing="Proportional" lineSpacingSize="1.4"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{subject}]]>
+                </textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement style="Column header"  x="428" y="19" width="55" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Top"/>
+                <text><![CDATA[Letter Dated :]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement style="Detail" x="489" y="19" width="61" height="15"/>
+                <textElement textAlignment="Left" verticalAlignment="Top"/>
+                <textFieldExpression class="java.util.Date">
+                    <![CDATA[new SimpleDateFormat("MM/dd/yyyy").format($F{letternDate})]]>
+                </textFieldExpression>
+            </textField>
+
+
+            <line>
+                <reportElement  positionType="Float" x="0" y="34" width="555" height="1" uuid="501ac6c4-e9d4-43cb-ba6b-7f2f44394cf3"/>
+                <graphicElement>
+                    <pen lineWidth="0.08" lineColor="#EFEFEF"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement positionType="Float" style="Column header"  x="0" y="35" width="100" height="16"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="3"/>
+                </textElement>
+                <text><![CDATA[Routed For Action To :]]></text>
+            </staticText>
+            <textField>
+                <reportElement positionType="Float" style="Detail" x="101" y="35" width="160" height="16"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{currentAction}]]>
+                </textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement positionType="Float" style="Column header"  x="260" y="35" width="76" height="16"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[Suspense Date :]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement positionType="Float" style="Detail" x="337" y="35" width="60" height="16"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{suspenddate}]]>
+                </textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement  positionType="Float" style="Column header"  x="398" y="35" width="90" height="16"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[Action Requested :]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement  positionType="Float" style="Detail" x="489" y="35" width="61" height="16"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{actionrequested}]]>
+                </textFieldExpression>
+            </textField>
+
+
+            <line>
+                <reportElement  positionType="Float" x="0" y="50" width="555" height="1" uuid="501ac6c4-e9d4-43cb-ba6b-7f2f44394cf3"/>
+                <graphicElement>
+                    <pen lineWidth="0.08" lineColor="#EFEFEF"/>
+                </graphicElement>
+            </line>
+
+            <staticText>
+                <reportElement  positionType="Float" style="Column header"  x="0" y="51" width="100" height="15"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <paragraph leftIndent="3"/>
+                </textElement>
+                <text><![CDATA[Action Taken :]]></text>
+            </staticText>
+            <textField>
+                <reportElement  positionType="Float" style="Detail" x="101" y="51" width="160" height="15"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{finalAction}]]>
+                </textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement  positionType="Float" style="Column header"  x="260" y="51" width="76" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[Date Filed :]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement  positionType="Float" style="Detail" x="337" y="51" width="65" height="15"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{datefiled}]]>
+                </textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement  positionType="Float" style="Column header"  x="404" y="51" width="60" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[Where Filed :]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement  positionType="Float" style="Detail" x="465" y="51" width="91" height="15"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String">
+                    <![CDATA[$F{placefiled}]]>
+                </textFieldExpression>
+            </textField>
+
+
+
+
+
+        </band>
+        <band height="7" splitType="Stretch">
+            <line>
+                <reportElement  positionType="Float" x="0" y="3" width="555" height="1" uuid="501ac6c4-e9d4-43cb-ba6b-7f2f44394cf3"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+        </band>
+    </detail>
+
+
+    <pageFooter>
+        <band height="25" splitType="Stretch">
+            <frame>
+                <reportElement mode="Opaque" x="-21" y="1" width="597" height="24"  uuid="183682bc-d976-4756-83e0-6625a3f98ed1"/>
+                <textField pattern="MMMM dd, yyyy (EEEE) hh:mm:ss a">
+                    <reportElement  style="Column header" x="22" y="1" width="197" height="20"  uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae"/>
+                    <textElement verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Printed : " + new java.util.Date()]]></textFieldExpression>
+                </textField>
+                <textField evaluationTime="Report">
+                    <reportElement  style="Column header" x="533" y="0" width="40" height="20"  uuid="0193f9b3-1559-491a-8580-b6988863b6a1"/>
+                    <textElement verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement  style="Column header" x="453" y="0" width="80" height="20"  uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+                </textField>
+
+            </frame>
+        </band>
+    </pageFooter>
+
+
+
+
+
+
+</jasperReport>

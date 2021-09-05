@@ -1,0 +1,141 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+<!-- Page Content -->
+<div class="container-fluid subContainer" sec:authorize="hasAuthority('SI_R')">
+    <div class="card subCard">
+
+
+        <!--Search Information Tool-->
+        <div class="card-body subcard-body pb-0 pt-2">
+            <form class="row row-cols-auto" th:object="${pssSearch}" th:action="@{/signaturelog/list}" method="get" name="searchformhwylog" id="searchformhwylog">
+                <div class="col pe-2">
+                    <button type="button" class="btn btn-outline-dark btn-sm" id="printPreviewBtn"><i class="fa fa-print"></i> Print</button>
+                </div>
+                <div class="col-1 pe-2">
+                    <div class="input-group date  p-0">
+                        <input class="form-control DateFormat" type="text" th:field="*{searchsdate}" id="searchsdate" name="searchsdate" placeholder="mm/dd/yyyy" autocomplete="off"  th:value="${filterForm.searchsdate}">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="col-1 pe-2">
+                    <div class="input-group date  p-0">
+                        <input class="form-control DateFormat" type="text" th:field="*{searchedate}" id="searchedate" name="searchedate" placeholder="mm/dd/yyyy" autocomplete="off"  th:value="${filterForm.searchedate}">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="col pe-2">
+                    <select class="form-control" th:field="*{searchType}" id="searchType" name="searchType">
+                        <option th:each="searchTypeList : ${filterForm.searchTypeList}" th:value="${searchTypeList.code2}" th:utext="${searchTypeList.codename}" th:selected="${searchTypeList.code2==filterForm.searchType}">
+                        </option>
+                    </select>
+                </div>
+                <div class="col pe-2">
+                    <input type="text" class="form-control" th:field="*{searchName}" id="searchName" name="searchName" placeholder="Search Name" th:value="${filterForm.searchName}">
+                </div>
+                <div class="col pe-2">
+                    <button type="submit" class="btn btn-outline-secondary mb-2 btn-sm"><i class="fa fa-search"></i> Search</button>
+                    <button type="button" class="btn btn-outline-primary mb-2 btn-sm" id='managesigninputBtn' sec:authorize="hasAuthority('SI_A')"><i class="fa fa-plus"></i> Add</button>
+                </div>
+
+            </form>
+        </div>
+        <!--Search Information Tool-->
+    </div>
+
+
+
+    <!--Listing Log-->
+    <div class="table-responsive " >
+
+        <table id="managehwysignlistTable" class="table  table-bordered mb-0 table-hover">
+            <thead class="commonThead">
+            <tr>
+                <th><input type="checkbox" class="form-controls" id="selectall"></th>
+                <th>Log Date</th>
+                <th>Letter No.</th>
+                <th>Originator</th>
+                <th>#Days</th>
+                <th>Subject</th>
+                <th>Action Taken</th>
+                <th>LastUpdated</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr th:each="results : ${results}" sec:authorize="hasAuthority('SI_R')">
+                <td><input type="checkbox" class="form-controls" name="printNum[]" th:value="${results.logID}" ></td>
+                <td ><a href="#" th:onclick="@{'loadsignlogdetail(' + ${results.logID} + ');'}" th:text="${#dates.format(results.InputDate, 'MM/dd/yyyy')}">1</a></td>
+                <td th:text="${results.LetterNumber}"   style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;max-width:120px;"></td>
+                <td th:text="${results.Originator}"  style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;max-width:240px;"></td>
+                <td th:if="${results.Completed}"><i class="fa fa-check text-success"  ></i></td>
+                <td th:if="${results.Completed==false}" th:text="${results.NumberofDay}" th:class="${results.NumberofDay<0}? 'text-danger' : 'text-success'"></td>
+                <td th:text="${results.Subject}" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;max-width:400px;"></td>
+                <td  th:text="${results.currentAction}"  style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;max-width:240px;"> </td>
+                <td th:text="${#dates.format(results.lastUpdated, 'MM/dd/yyyy')}"></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+
+
+        <!--Paging Log-->
+        <div class="bbsBottom" th:if="${results.totalPages gt 0}" sec:authorize="hasAuthority('SI_R')">
+            <ul class="pagination pagination-md justify-content-center " style="margin:10px 0" th:with="start=${T(Math).floor(results.number/10)*10 + 1},
+                    last=(${start + 9 < results.totalPages ? start + 9 : results.totalPages})">
+
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/signaturelog/list?page=1&searchsdate={searchsdate}&searchedate={searchedate}&searchType={searchType}&searchName={searchName}(searchsdate=${filterForm.searchsdate},searchedate=${filterForm.searchedate},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}" aria-label="First">
+                        <span aria-hidden="true">First</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${results.number eq 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/signaturelog/list?page={id}&searchsdate={searchsdate}&searchedate={searchedate}&searchType={searchType}&searchName={searchName}(id=${results.number lt 2 ? 1 : results.number},searchsdate=${filterForm.searchsdate},searchedate=${filterForm.searchedate},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}"><<</a>
+                </li>
+                <li  th:each="page: ${#numbers.sequence(start, last)}" th:class=" ${page == results.number+1} ? 'page-item active' : 'page-item ' ">
+                    <a class="page-link" th:href="@{/signaturelog/list?page={id}&searchsdate={searchsdate}&searchedate={searchedate}&searchType={searchType}&searchName={searchName}(id=${page},searchsdate=${filterForm.searchsdate},searchedate=${filterForm.searchedate},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}"
+                       th:text="${page}">1</a>
+
+                </li>
+                <li class="page-item"  th:classappend="${results.number + 1 eq results.totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/signaturelog/list?page={id}&searchsdate={searchsdate}&searchedate={searchedate}&searchType={searchType}&searchName={searchName}(id=${results.number + 2},searchsdate=${filterForm.searchsdate},searchedate=${filterForm.searchedate},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}">>></a>
+                </li>
+                <li class="page-item" >
+                    <a class="page-link" th:href="@{/signaturelog/list?page={id}&searchsdate={searchsdate}&searchedate={searchedate}&searchType={searchType}&searchName={searchName}(id=${results.totalPages},searchsdate=${filterForm.searchsdate},searchedate=${filterForm.searchedate},searchType=${filterForm.searchType},searchName=${filterForm.searchName})}" aria-label="Last">
+                        <span aria-hidden="true">Last</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--Paging Log-->
+
+
+    </div>
+
+
+
+    <!--Listing Log-->
+
+
+
+
+</div>
+<!-- Page Content -->
+
+
+
+<div lang="en" th:include="common/modal :: modal"></div>
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>
+<script th:src="@{/js/log-managehwysignlog.js}"></script><!--Custom js-->

@@ -1,0 +1,218 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div class="container-xxl subContainer pt-3 ps-0 pe-0" sec:authorize="hasAuthority('USER_R') and hasRole('ROLE_ADMIN')">
+
+    <div class="card subCard p-3" >
+
+
+
+        <form action="#" th:action="${pssView.UserID}  ? @{/members/edit} : @{/members/write}" th:object="${pssView}" id="basicmanageUsersForm" name="basicmanageUsersForm" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="fieldset03">
+                        <h1><span>User Information</span></h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="UserID">Log-on Name</label>
+                            <input type="text" class="form-control" id="userID" name="userID"  th:field="*{userID}" th:value="${pssView?.userID}" autocomplete="off" th:readonly="${pssView.userID!= null}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="Password">Password</label>
+                            <input type="text" class="form-control" id="Password" name="Password"  th:field="*{Password}"  autocomplete="off"  th:if="${pssView.userID== null}">
+                            <input type="hidden"  id="Password" name="Password"  th:field="*{Password}"   th:if="${pssView.userID!= null}">
+                            <input type="text" class="form-control" id="oldPassword" name="oldPassword"  th:field="*{oldPassword}"  autocomplete="off"  th:if="${pssView.userID!= null}">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="FirstName">First Name</label>
+                            <input type="text" class="form-control" id="FirstName" name="FirstName"  th:field="*{FirstName}" th:value="${pssView?.FirstName}" autocomplete="off">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="LastName">Middle Name</label>
+                            <input type="text" class="form-control" id="MidName" name="MidName"  th:field="*{MidName}" th:value="${pssView?.MidName}" autocomplete="off">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="LastName">Last Name</label>
+                            <input type="text" class="form-control" id="LastName" name="LastName"  th:field="*{LastName}" th:value="${pssView?.LastName}" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="Position">Position Title</label>
+                            <input type="text" class="form-control" id="Position" name="Position"  th:field="*{Position}" th:value="${pssView?.Position}" autocomplete="off">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="PhoneNumber">Phone</label>
+                            <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber"  th:field="*{PhoneNumber}" th:value="${pssView?.PhoneNumber}" autocomplete="off">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="Email">Email</label>
+                            <input type="text" class="form-control" id="Email" name="Email"  th:field="*{Email}" th:value="${pssView?.Email}" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-12 mb-3">
+                            <label for="comID">Company</label>
+                            <select class="form-control" id="comID"  name="comID" th:field="*{comID}">
+                                <option value="0">-Company-</option>
+                                <option th:each="CompanyType : ${CompanyType}" th:value="${CompanyType.CompanyID}" th:utext="${CompanyType.comName +' '+CompanyType.comBranch}" th:selected="${CompanyType.CompanyID==pssView.comID}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="reportuserLevel">Report Level Group</label>
+                            <select class="form-control" id="reportuserLevel"  name="reportuserLevel" th:field="*{reportuserLevel}">
+                                <option th:each="Reportlevel : ${Reportlevel}" th:value="${Reportlevel.code2}" th:utext="${Reportlevel.codename}" th:selected="${Reportlevel.code2==pssView.reportuserLevel}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 pt-4">
+                            <div class="form-check">
+                                <input class="form-check-input big-checkbox me-2" type="checkbox" value="1"   id="Administrator" name="Administrator"  th:checked="${pssView.Administrator==true}">
+                                <label class="form-check-label mt-2" for="Administrator">
+                                    Admin
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 pt-4">
+                            <div class="form-check">
+                                <input class="form-check-input big-checkbox me-2" type="checkbox" value="1" id="ExpiredUser" name="ExpiredUser" th:checked="${pssView.ExpiredUser==true}">
+                                <label class="form-check-label mt-2 text-danger" for="ExpiredUser">
+                                    Expired
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+                <div class="col-md-6">
+
+                    <div class="fieldset03">
+                        <h1><span>PSS System Permission</span></h1>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="userpermissionTable" class="table table-bordered" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th colspan=2></th>
+                                <th>Read</th>
+                                <th>Edit</th>
+                                <th>Add</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td rowspan=3  class="text-start">Main Tables</td>
+                                <td class="text-start">HWY LOG</td>
+                                <td><input type="checkbox" th:field="*{securityForm.hwylogAuthR}" class="form-check-input" value="1"  name="hwylogAuthR" id="hwylogAuthR" th:checked="${pssView.securityForm.hwylogAuthR}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.hwylogAuthA}" class="form-check-input" value="1"  name="hwylogAuthA" id="hwylogAuthA"th:checked="${pssView.securityForm.hwylogAuthA}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.hwylogAuthE}" class="form-check-input" value="1"  name="hwylogAuthE" id="hwylogAuthE"th:checked="${pssView.securityForm.hwylogAuthE}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.hwylogAuthD}" class="form-check-input" value="1"  name="hwylogAuthD" id="hwylogAuthD"th:checked="${pssView.securityForm.hwylogAuthD}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">SIGNATURE LOG</td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.signaturelogAuthR}" name="signaturelogAuthR" id="signaturelogAuthR"   th:checked="${pssView.securityForm.signaturelogAuthR}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.signaturelogAuthA}" name="signaturelogAuthA" id="signaturelogAuthA"   th:checked="${pssView.securityForm.signaturelogAuthA}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.signaturelogAuthE}" name="signaturelogAuthE" id="signaturelogAuthE"   th:checked="${pssView.securityForm.signaturelogAuthE}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.signaturelogAuthD}" name="signaturelogAuthD" id="signaturelogAuthD"   th:checked="${pssView.securityForm.signaturelogAuthD}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">HWY-E LOG</td>
+                                <td><input type="checkbox" th:field="*{securityForm.hwyelogAuthR}" class="form-check-input" value="1"  name="hwyelogAuthR" id="hwyelogAuthR" th:checked="${pssView.securityForm.hwyelogAuthR}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.hwyelogAuthA}" class="form-check-input" value="1"  name="hwyelogAuthA" id="hwyelogAuthA"th:checked="${pssView.securityForm.hwyelogAuthA}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.hwyelogAuthE}" class="form-check-input" value="1"  name="hwyelogAuthE" id="hwyelogAuthE"th:checked="${pssView.securityForm.hwyelogAuthE}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.hwyelogAuthD}" class="form-check-input" value="1"  name="hwyelogAuthD" id="hwyelogAuthD"th:checked="${pssView.securityForm.hwyelogAuthD}"></td>
+                            </tr>
+                            <tr>
+                                <td rowspan=5  class="text-start">Setting</td>
+                                <td class="text-start">Users</td>
+                                <td><input type="checkbox" th:field="*{securityForm.manageuserauthR}" class="form-check-input" value="1"  name="manageuserauthR" id="manageuserauthR" th:checked="${pssView.securityForm.manageuserauthR}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.manageuserauthA}" class="form-check-input" value="1"  name="manageuserauthA" id="manageuserauthA"th:checked="${pssView.securityForm.manageuserauthA}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.manageuserauthE}" class="form-check-input" value="1"  name="manageuserauthE" id="manageuserauthE"th:checked="${pssView.securityForm.manageuserauthE}"></td>
+                                <td><input type="checkbox" th:field="*{securityForm.manageuserauthD}" class="form-check-input" value="1"  name="manageuserauthD" id="manageuserauthD"th:checked="${pssView.securityForm.manageuserauthD}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Company</td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managecompanyauthR}" name="managecompanyauthR" id="managecompanyauthR"   th:checked="${pssView.securityForm.managecompanyauthR}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managecompanyauthA}" name="managecompanyauthA" id="managecompanyauthA"   th:checked="${pssView.securityForm.managecompanyauthA}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managecompanyauthE}" name="managecompanyauthE" id="managecompanyauthE"   th:checked="${pssView.securityForm.managecompanyauthE}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managecompanyauthD}" name="managecompanyauthD" id="managecompanyauthD"   th:checked="${pssView.securityForm.managecompanyauthD}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Report</td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managereportauthR}" name="managereportauthR" id="managereportauthR" th:checked="${pssView.securityForm.managereportauthR}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managereportauthA}" name="managereportauthA" id="managereportauthA" th:checked="${pssView.securityForm.managereportauthA}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managereportauthE}" name="managereportauthE" id="managereportauthE" th:checked="${pssView.securityForm.managereportauthE}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managereportauthD}" name="managereportauthD" id="managereportauthD" th:checked="${pssView.securityForm.managereportauthD}"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">Code</td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managecodeauthR}" name="managecodeauthR" id="managecodeauthR" th:checked="${pssView.securityForm.managecodeauthR}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managecodeauthA}" name="managecodeauthA" id="managecodeauthA" th:checked="${pssView.securityForm.managecodeauthA}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managecodeauthE}" name="managecodeauthE" id="managecodeauthE" th:checked="${pssView.securityForm.managecodeauthE}"></td>
+                                <td><input type="checkbox" class="form-check-input" value="1"  th:field="*{securityForm.managecodeauthD}" name="managecodeauthD" id="managecodeauthD" th:checked="${pssView.securityForm.managecodeauthD}"></td>
+                            </tr>
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+            <hr>
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-primary btn-sm" id="adddataBtn" th:if="not ${pssView.UserID}" sec:authorize="hasAuthority('USER_A') and hasRole('ROLE_ADMIN')"><i class="fa fa-plus"></i> Add</button>
+                <button type="submit" class="btn btn-outline-warning btn-sm" id="editdataBtn" th:if="${pssView.UserID}" sec:authorize="hasAuthority('USER_E') and hasRole('ROLE_ADMIN')"><i class="fa fa-edit"></i> edit</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" id="deldataBtn" th:if="${pssView.UserID}" sec:authorize="hasAuthority('USER_D') and hasRole('ROLE_ADMIN')"><i class="fa fa-minus"></i> Delete</button>
+                <button type="button" class="btn btn-outline-dark btn-sm"  id="listdataBtn"><i class="fa fa-list-ul"></i> List</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+</div>
+<!-- Page Content -->
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>
+<script th:src="@{/js/pss-manageuserscustom.js}"></script><!--Custom js-->

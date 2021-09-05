@@ -1,0 +1,106 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div class="container-xxl subContainer pt-3 ps-0 pe-0" sec:authorize="hasAuthority('SI_R')">
+
+  <div class="card subCard p-3" >
+
+
+
+    <form action="#" th:action="${pssView.logID}  ? @{/signaturelog/edit} : @{/signaturelog/write}" th:object="${pssView}" id="basicmanagehwylogForm" name="basicmanagehwylogForm" method="post">
+      <input type="hidden"  id="logID"  th:field="*{logID}" th:value="${pssView?.logID}">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="fieldset03">
+            <h1><span>Signature Information</span></h1>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="LetterNumber">Letter No.</label>
+              <input type="text" class="form-control" id="LetterNumber" name="LetterNumber"  th:field="*{LetterNumber}"  autocomplete="off"    th:value="${pssView?.LetterNumber}"  required>
+            </div>
+
+            <div class="col-md-8 mb-3">
+              <label for="Originator">Originator</label>
+              <input type="text" class="form-control" id="Originator" name="Originator"  th:field="*{Originator}"  autocomplete="off"    th:value="${pssView?.Originator}"  required>
+            </div>
+            <div class="col-md-12 mb-3">
+              <label for="Subject">Subject</label>
+              <textarea class="form-control"  id="Subject" name="Subject" th:field="*{Subject}" th:text="${pssView?.Subject}" style="height:6rem;"  required></textarea>
+            </div>
+            <div class="col-md-12 mb-3">
+              <label for="FinalAction">Final Action</label>
+              <input type="text" class="form-control" id="FinalAction" name="FinalAction"  th:field="*{FinalAction}"  autocomplete="off"    th:value="${pssView?.FinalAction}" >
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="InputDate">Letter/Entry Date</label>
+              <div class="input-group date  p-0">
+                <input class="form-control DateFormat" type="text"  id="InputDate" name="InputDate"  autocomplete="off" th:value="${#dates.format(pssView.InputDate, 'MM/dd/yyyy')}"  required>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="ExpirationDate">Expiration Date</label>
+              <div class="input-group date  p-0">
+                <input class="form-control DateFormat" type="text"  id="ExpirationDate" name="ExpirationDate"  autocomplete="off"  th:value="${#dates.format(pssView.ExpirationDate, 'MM/dd/yyyy')}" required>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3 pt-3">
+              <div class="form-check">
+                <input class="form-check-input big-checkbox me-2" type="checkbox" value="1" id="Completed" name="Completed" th:checked="${pssView.Completed}">
+                <label class="form-check-label mt-2 text-danger" for="Completed">
+                  Completed
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <div class="fieldset03">
+            <h1><span>Action Taken</span></h1>
+          </div>
+
+          <div>
+            <div id="signlogactionTakenTable"></div>
+          </div>
+          <p id="loggactionTakenmemo"></p>
+
+
+
+        </div>
+      </div>
+      <hr>
+      <div class="text-center">
+        <button type="submit" class="btn btn-outline-primary btn-sm" id="adddataBtn" th:if="not ${pssView.logID}"  sec:authorize="hasAuthority('SI_A')"><i class="fa fa-plus"></i> Add</button>
+        <button type="submit" class="btn btn-outline-warning btn-sm" id="editdataBtn" th:if="${pssView.logID}" sec:authorize="hasAuthority('SI_E')"><i class="fa fa-edit"></i> edit</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" id="deldataBtn" th:if="${pssView.logID}" sec:authorize="hasAuthority('SI_D')"><i class="fa fa-minus"></i> Delete</button>
+        <button type="button" class="btn btn-outline-dark btn-sm"  id="listdataBtn"><i class="fa fa-list-ul"></i> List</button>
+      </div>
+    </form>
+
+  </div>
+
+
+
+
+</div>
+<!-- Page Content -->
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>
+<script th:src="@{/js/log-managehwysignlog.js}"></script><!--Custom js-->

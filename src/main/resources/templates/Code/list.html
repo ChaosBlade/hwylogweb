@@ -1,0 +1,102 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+<!-- Page Content -->
+<div class="container-fluid subContainer" sec:authorize="hasAuthority('COD_R') and hasRole('ROLE_ADMIN')">
+  <div class="card subCard">
+    <!--Search Information Tool-->
+    <div class="card-body subcard-body pb-0 pt-2">
+        <form class="row row-cols-auto" th:object="${pssSearch}" th:action="@{/code/list}" method="post" name="searchreport" id="searchreport">
+          <div class="col pe-2">
+            <select class="form-control" th:field="*{searchCodeGroup}" id="searchCodeGroup" name="searchCodeGroup">
+                <option value="-1">-All Group-</option>
+                <option th:each="codepart : ${codepart}" th:value="${codepart.code2}" th:utext="${codepart.codename}" th:selected="${codepart.code2==filterForm.SearchCodeGroup}">
+                </option>
+            </select>
+          </div>
+          <div class="col pe-2">
+            <input type="text" class="form-control" th:field="*{searchName}" id="searchName" name="searchName" placeholder="Name" th:value="${filterForm.searchName}">
+          </div>   
+          <div class="col pe-2">
+            <button type="submit" class="btn btn-outline-secondary mb-2 btn-sm"><i class="fa fa-search"></i> Search</button> 
+            <button type="button" class="btn btn-outline-primary mb-2 btn-sm" id='codeinputBtn' sec:authorize="hasAuthority('COD_A') and hasRole('ROLE_ADMIN')"><i class="fa fa-plus"></i> Add</button>
+          </div>
+        </form>
+    </div>
+<!--Search Information Tool-->
+  </div>  
+<!--Listing Log-->
+    <div class="table-responsive">
+      <table id="managecodelistTable" class="table  table-bordered mb-0 table-hover">
+          <thead class="commonThead">
+              <tr>
+                  <th>codeSeq</th>
+                  <th>Group Code</th>
+                  <th>Code Group Name</th>
+                  <th>Code</th>
+                  <th>Code Name</th>
+                  <th>Order</th>                   
+                  <th>Desciption</th>  
+                  <th>CertDuration</th> 
+                  <th>User Name</th>
+                  <th>LastUpdated</th>  
+              </tr>
+          </thead>
+          <tbody  sec:authorize="hasAuthority('COD_R') and hasRole('ROLE_ADMIN')">
+              <tr th:each="results : ${results}">
+                  <td ><a href="#" th:onclick="@{'loadmanagecodedetail(' + ${results.codeSeq} + ');'}" th:text="${results.codeSeq}">1</a></td>
+                  <td th:text="${results.code1}">1</td>
+                  <td th:text="${results.codegroupname}">Code Group Name</td>
+                  <td th:text="${results.code2}">1</td>
+                  <td th:text="${results.codename}">Capacity</td>
+                  <td th:text="${results.codeord}">1</td>
+                  <td th:text="${results.Desciption}"></td>
+                  <td th:text="${results.CertDuration}"></td>
+                  <td th:text="${results.UserName}">ysong</td>
+                  <td th:text="${results.lastUpdated}">04/13/2021 12:00:00</td>
+              </tr>
+
+        </tbody>                                        
+      </table>
+<!--Paging Log-->
+        <div class="bbsBottom" th:if="${results.totalPages gt 0}"  sec:authorize="hasAuthority('COD_R') and hasRole('ROLE_ADMIN')">
+            <ul class="pagination pagination-md justify-content-center " style="margin:10px 0" th:with="start=${T(Math).floor(results.number/10)*10 + 1},
+                    last=(${start + 9 < results.totalPages ? start + 9 : results.totalPages})">
+
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/code/list?page=1&searchCodeGroup={searchCodeGroup}&searchName={searchName}(searchCodeGroup=${filterForm.searchCodeGroup},searchName=${filterForm.searchName})}" aria-label="First">
+                        <span aria-hidden="true">First</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${results.number eq 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/code/list?page={id}&searchCodeGroup={searchCodeGroup}&searchName={searchName}(id=${results.number lt 2 ? 1 : results.number},searchCodeGroup=${filterForm.searchCodeGroup},searchName=${filterForm.searchName})}"><<</a>
+                </li>
+                <li  th:each="page: ${#numbers.sequence(start, last)}" th:class=" ${page == results.number+1} ? 'page-item active' : 'page-item ' ">
+                      <a class="page-link" th:href="@{/code/list?page={id}&searchCodeGroup={searchCodeGroup}&searchName={searchName}(id=${page},searchCodeGroup=${filterForm.searchCodeGroup},searchName=${filterForm.searchName})}"
+                         th:text="${page}">1</a>
+
+                </li>
+                <li class="page-item"  th:classappend="${results.number + 1 eq results.totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/code/list?page={id}&searchCodeGroup={searchCodeGroup}&searchName={searchName}(id=${results.number + 2},searchCodeGroup=${filterForm.searchCodeGroup},searchName=${filterForm.searchName})}">>></a>
+                </li>
+                <li class="page-item" >
+                    <a class="page-link" th:href="@{/code/list?page={id}&searchCodeGroup={searchCodeGroup}&searchName={searchName}(id=${results.totalPages},searchCodeGroup=${filterForm.searchCodeGroup},searchName=${filterForm.searchName})}" aria-label="Last">
+                        <span aria-hidden="true">Last</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+<!--Paging Log-->
+  </div>
+<!--Listing Log-->
+</div>
+<!-- Page Content -->
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>
+<script th:src="@{/js/pss-managecodecustom.js}"></script><!--Custom js-->

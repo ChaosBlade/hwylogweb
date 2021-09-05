@@ -1,0 +1,98 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div class="container-xxl subContainer pt-3 ps-0 pe-0"  sec:authorize="hasAuthority('COD_R') and hasRole('ROLE_ADMIN')">
+ 
+<div class="card subCard p-3" >
+
+
+
+<form action="#" th:action="${pssView.codeSeq}  ? @{/code/edit} : @{/code/write}" th:object="${pssView}" id="basicmanagecodeinfoForm" name="basicmanagecodeinfoForm" method="post">
+
+<div class="fieldset02">
+  <h1><span>Code Setting</span></h1> 
+            <input type="hidden"  id="codeSeq"  th:field="*{codeSeq}" th:value="${pssView?.codeSeq}">
+            <input type="hidden"  id="code2"  th:field="*{code2}" th:value="${pssView?.code2}">
+              <div class="row px-2 pt-3">               
+                <div class="col-md-3 mb-3">
+                  <label for="code1">Code Group</label>
+                  <select class="form-control" id="code1"  th:field="*{code1}">
+                      <option th:each="codepart : ${codepart}" th:value="${codepart.code2}" th:utext="${codepart.codename}" th:selected="${codepart.code2==pssView.code1}">
+                      </option>
+                    </select>
+                </div>
+
+
+
+
+              <div class="col-md-3 mb-3">
+                <label for="codename">Code Name</label>
+                <input type="text" class="form-control" id="codename" th:field="*{codename}" th:value="${pssView?.codename}" autocomplete="off">
+              </div>   
+                <div class="col-md-3 mb-3 pe-0">
+                  <label for="CertDuration">CertDuration</label>
+                  <input type="text" class="form-control" id="CertDuration"  th:field="*{CertDuration}" th:value="${pssView?.CertDuration}" autocomplete="off">
+                </div> 
+                 <div class="col-md-3 mb-3 pe-0">
+                  <label for="codeord">Sort Order</label>    
+                  <select class="form-control" id="codeord" th:field="*{codeord}">
+                      <option th:each="i : ${#numbers.sequence(0, 100)}" th:value="${i}" th:text="${i}" th:selected="${i==pssView.code1}">
+                      </option>
+                    </select> 
+                </div> 
+
+
+
+
+              </div>
+
+
+            <div class="row px-2 pt-2">
+              <div class="col-md-12 mb-3">
+                <label for="Desciption">Desciption</label>
+                <input type="text" class="form-control" id="Desciption" th:field="*{Desciption}" th:value="${pssView?.Desciption}" autocomplete="off">
+              </div>   
+                         
+            </div>                
+</div>   
+
+<div class="text-center">
+
+        <button type="submit" class="btn btn-outline-primary btn-sm" id="addcodeBtn" th:if="not ${pssView.codeSeq}" sec:authorize="hasAuthority('COD_A') and hasRole('ROLE_ADMIN')"><i class="fa fa-plus"></i> Add</button>
+        <button type="submit" class="btn btn-outline-warning btn-sm" id="editcodeBtn" th:if="${pssView.codeSeq}" sec:authorize="hasAuthority('COD_E') and hasRole('ROLE_ADMIN')"><i class="fa fa-edit"></i> edit</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" id="delcodeBtn" th:if="${pssView.codeSeq}" sec:authorize="hasAuthority('COD_D') and hasRole('ROLE_ADMIN')"><i class="fa fa-minus"></i> Delete</button>
+        <button type="button" class="btn btn-outline-dark btn-sm"  id="listdataBtn"><i class="fa fa-list-ul"></i> List</button>    
+</div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+<!-- Page Content -->
+<div lang="en" th:include="common/footer :: footer"></div>
+<script th:src="@{/js/pss-managecodecustom.js}"></script><!--Custom js-->
+</body>
+</html>
+

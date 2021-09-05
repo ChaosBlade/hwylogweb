@@ -1,0 +1,127 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:include="common/header :: header"></head>
+<body>
+<!-- Navigation -->
+<nav th:include="common/navbar :: navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" >
+</nav>
+<!-- Navigation -->
+
+
+
+
+<!-- Page Content -->
+<div class="container" style="margin-top:6rem;">
+    <section id="widget-grid" class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-3" sec:authorize="hasAuthority('HW_R')">
+
+            <div class="card h-30 linkPointer mb-4"  onclick="goUrl('hwymaillog/list');" >
+                <div class="card-body">
+                    <p class="card-text mainIconText"><i class="fa fa-envelope-o"></i></p>
+                    <h5 class="card-title text-center" >HWY Log</h5>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card mb-3" th:each="reportGroup1 : ${reportGroup1}" th:if="${!reportGroup1.reportform.isEmpty()}">
+                        <div class="card-header" th:text="${reportGroup1.reportTypename}">Report Name
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div th:each="reportform : ${reportGroup1.reportform}" th:if="${#authorization.expression('hasAuthority(''REPORT_'+reportform.reportUserLevel+''')')}" th:class="'cursorpointer '+${reportform.divid ? 'col-md-6' : 'col-md-12'}"  th:onclick="'printreportModal('+${reportform.reportId}+')'" ><i class="fa fa-square-o"></i> <span th:text="${reportform.reportName}">Report Name</span>  </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+
+        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-3" sec:authorize="hasAuthority('SI_R')">
+            <div class="card h-30 linkPointer mb-4"  onclick="goUrl('signaturelog/list');" >
+                <div class="card-body">
+                    <p class="card-text mainIconText"><i class="fa fa-folder-open-o"></i></p>
+                    <h5 class="card-title text-center">Signature Log</h5>
+                </div>
+            </div>
+
+
+
+            <div class="card mb-3" th:each="reportGroup2 : ${reportGroup2}" th:if="${!reportGroup2.reportform.isEmpty()}">
+                <div class="card-header" th:text="${reportGroup2.reportTypename}">Report Name
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div th:each="reportform : ${reportGroup2.reportform}" th:if="${#authorization.expression('hasAuthority(''REPORT_'+reportform.reportUserLevel+''')')}" th:class="'cursorpointer '+${reportform.divid ? 'col-md-6' : 'col-md-12'}" th:onclick="'printreportModal('+${reportform.reportId}+')'" ><i class="fa fa-square-o"></i> <span th:text="${reportform.reportName}">Report Name</span>  </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-3"  sec:authorize="hasAuthority('HWE_R')" >
+            <div class="card h-30 linkPointer mb-4"  onclick="goUrl('hwyemaillog/list');" >
+                <div class="card-body">
+                    <p class="card-text mainIconText"><i class="fa fa-clipboard"></i></p>
+                    <h5 class="card-title text-center">HWY-E Mail Log</h5>
+                </div>
+            </div>
+            <div class="card mb-3" th:each="reportGroup3 : ${reportGroup3}" th:if="${!reportGroup3.reportform.isEmpty()}">
+                <div class="card-header" th:text="${reportGroup3.reportTypename}">Report Name
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div th:each="reportform : ${reportGroup3.reportform}" th:if="${#authorization.expression('hasAuthority(''REPORT_'+reportform.reportUserLevel+''')')}" th:class="'cursorpointer '+${reportform.divid ? 'col-md-6' : 'col-md-12'}"  th:onclick="'printreportModal('+${reportform.reportId}+')'" ><i class="fa fa-square-o"></i> <span th:text="${reportform.reportName}">Report Name</span>  </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="card h-30 linkPointer mb-4"  onclick="goUrl('members/list');" sec:authorize="hasAuthority('USER_R')">
+                <div class="card-body">
+                    <p class="card-text mainIconText"><i class="fa fa-users"></i></p>
+                    <h5 class="card-title text-center">Users</h5>
+                </div>
+            </div>
+            <div class="card h-30 linkPointer mb-4"  onclick="goUrl('company/list');" sec:authorize="hasAuthority('COM_R')">
+                <div class="card-body">
+                    <p class="card-text mainIconText"><i class="fa fa-building"></i></p>
+                    <h5 class="card-title text-center">Companys & Office</h5>
+                </div>
+            </div>
+
+
+            <div class="card h-30 linkPointer mb-4"  onclick="goUrl('report/list');"  sec:authorize="hasAuthority('REP_R')">
+                <div class="card-body">
+                    <p class="card-text mainIconText"><i class="fa fa-print"></i></p>
+                    <h5 class="card-title text-center">Reports</h5>
+                </div>
+            </div>
+            <div class="card h-30 linkPointer mb-4"  onclick="goUrl('code/list');"  sec:authorize="hasAuthority('COD_R')">
+                <div class="card-body">
+                    <p class="card-text mainIconText"><i class="fa fa-cogs"></i></p>
+                    <h5 class="card-title text-center">Code</h5>
+                </div>
+            </div>
+
+            <div class="card mb-3" th:each="reportGroup4 : ${reportGroup4}" th:if="${!reportGroup4.reportform.isEmpty()}">
+                <div class="card-header" th:text="${reportGroup4.reportTypename}">Report Name
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div th:each="reportform : ${reportGroup4.reportform}" th:if="${#authorization.expression('hasAuthority(''REPORT_'+reportform.reportUserLevel+''')')}" th:class="'cursorpointer '+${reportform.divid ? 'col-md-6' : 'col-md-12'}"  th:onclick="'printreportModal('+${reportform.reportId}+')'" ><i class="fa fa-square-o"></i> <span th:text="${reportform.reportName}">Report Name</span>  </div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </section>
+</div>
+<!-- Page Content -->
+
+<div lang="en" th:include="common/modal :: modal"></div>
+<div lang="en" th:include="common/footer :: footer"></div>
+</body>
+</html>

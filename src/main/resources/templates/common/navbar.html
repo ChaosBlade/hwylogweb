@@ -1,0 +1,27 @@
+<nav th:fragment="navbar" >
+<div class="container-fluid" >
+      <a class="navbar-brand" href="/main"><img src="image/mainlogorev.png" class="toplogo">HWY MAIL & SIGNATURE LOG DB</a>
+      <a class="navbar-brandtitle" th:href="@{${topTitle.titleLink}}"><button type="button" class="btn btn-title"><i class="fa fa-angle-double-right"></i><span th:text="${topTitle.titleName}"></span></button></a>
+      <button class="navbar-toggler" type="button" onclick="javascript:openNav()">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
+      <ul class="navbar-nav ">
+      <li class="nav-item active navIcon">
+      <a class="nav-link" href="/main"><i class="fa fa-home"></i><label class="d-sm-none ml-2"> HOME</label></a>
+      </li>
+            <li class="nav-item navIcon" >
+                  <a class="nav-link" href="#" onclick="javascript:openNav()"><i class="fa fa-reorder"></i></a>
+            </li>
+
+            <li class="nav-item navIcon" >
+                  <a class="nav-link active" href="javascript:goUrl('/');" title="LOGOUT" alt="LOGOUT"><i class="fa fa-external-link"></i><label class="d-sm-none ml-2"> LOG OUT</label></a>
+            </li>
+      </ul>
+      </div>
+      </div>
+</nav>
